@@ -5,31 +5,31 @@ import {
 } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
 import * as bcrypt from "bcrypt";
-import { OwnersService } from "../owners/owners.service";
-import { LoginDto } from "./dto/login.dto";
-import { RegisterOwnerDto } from "./dto/register-owner.dto";
+import { LoginDto } from "../../../app/DTO/login.dto";
+import { findEmailDto, RegisterOwnerDto } from "../../../app/DTO/register-owner.dto";
+import { OwnerRepository } from "../../repositories/owner/owners.service";
+import { OwnerEntity } from "src/core/domain/entities/owner.entity";
+
 
 @Injectable()
 export class AuthService {
   constructor(
-    private ownersService: OwnersService,
+    private OwnerRepository: OwnerRepository,
     private jwtService: JwtService
   ) {}
+  
 
   async register(registerOwnerDto: RegisterOwnerDto) {
-    // Check if owner already exists
-    const existingOwner = await this.ownersService.findByEmail(
+    const existingOwner = await this.OwnerRepository.findByEmail(
       registerOwnerDto.email
     );
     if (existingOwner) {
       throw new ConflictException("Email already registered");
     }
 
-    // Hash password
     const hashedPassword = await bcrypt.hash(registerOwnerDto.password, 10);
 
-    // Create new owner
-    const newOwner = await this.ownersService.create({
+    const newOwner = await this.OwnerRepository.create({
       ...registerOwnerDto,
       password: hashedPassword,
     });
@@ -51,22 +51,23 @@ export class AuthService {
   }
 
   async login(loginDto: LoginDto) {
-    // Find owner by email
-    const owner = await this.ownersService.findByEmail(loginDto.email);
-    if (!owner) {
+    const ownerData = await this.OwnerRepository.findByEmail(loginDto.email);
+    if (!ownerData) {
       throw new UnauthorizedException("Invalid email or password");
     }
 
-    // Verify password
-    const isPasswordValid = await bcrypt.compare(
-      loginDto.password,
-      owner.password
+    const owner = new OwnerEntity(
+      ownerData.id,
+      ownerData.email,
+      ownerData.password,
+      ownerData.establishmentName,
     );
+
+    const isPasswordValid = await owner.isPasswordValid(loginDto.password)
     if (!isPasswordValid) {
-      throw new UnauthorizedException("Invalid email or password");
+    throw new UnauthorizedException("Invalid email or password");
     }
 
-    // Generate JWT token
     const token = this.jwtService.sign({
       sub: owner.id,
       email: owner.email,
@@ -81,4 +82,26 @@ export class AuthService {
       },
     };
   }
+  async getOwner(itOwner: findEmailDto) {
+  
+    const email = (itOwner as any).email?.email || itOwner.email;
+
+  
+    const owner = await this.OwnerRepository.findByEmail(email);
+  
+    console.log(owner);
+    if (!owner) {
+      throw new UnauthorizedException("Invalid email");
+    }
+    return {
+      owner: {
+        id: owner.id,
+        email: owner.email,
+        establishmentName: owner.establishmentName,
+      },
+    };
+  }
+  
+  
 }
+

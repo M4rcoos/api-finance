@@ -17,7 +17,7 @@ import {
   ApiQuery,
 } from "@nestjs/swagger";
 import { TransactionsService } from "./transactions.service";
-import { JwtAuthGuard } from "../auth/guards/jwt-auth.guard";
+import { JwtAuthGuard } from "../../core/view/middlewares/guards/jwt-auth.guard";
 import { CreateTransactionDto } from "./dto/create-transaction.dto";
 
 @ApiTags("Transactions")

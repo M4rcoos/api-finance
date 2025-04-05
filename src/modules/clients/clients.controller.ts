@@ -15,7 +15,7 @@ import {
   ApiResponse,
 } from "@nestjs/swagger";
 import { ClientsService } from "./clients.service";
-import { JwtAuthGuard } from "../auth/guards/jwt-auth.guard";
+import { JwtAuthGuard } from "../../core/view/middlewares/guards/jwt-auth.guard";
 import { CreateClientDto } from "./dto/create-client.dto";
 import { UpdateClientDto } from "./dto/update-client.dto";
 

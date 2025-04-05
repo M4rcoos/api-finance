@@ -1,11 +1,12 @@
+
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { PrismaService } from '../../infra/prisma/prisma.service';
-import { RegisterOwnerDto } from '../auth/dto/register-owner.dto';
-import { UpdateOwnerDto } from './dto/update-owner.dto';
 import * as bcrypt from 'bcrypt';
+import { PrismaService } from 'src/infra/prisma/prisma.service';
+import { RegisterOwnerDto } from '../../DTO/register-owner.dto';
+import { UpdateOwnerDto } from 'src/modules/owners/dto/update-owner.dto';
 
 @Injectable()
-export class OwnersService {
+export class OwnerRepository {
   constructor(private prisma: PrismaService) {}
 
   async create(data: RegisterOwnerDto) {

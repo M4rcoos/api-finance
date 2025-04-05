@@ -5,14 +5,14 @@ import {
   ApiOperation,
   ApiResponse,
 } from "@nestjs/swagger";
-import { OwnersService } from "./owners.service";
-import { JwtAuthGuard } from "../auth/guards/jwt-auth.guard";
+import { JwtAuthGuard } from "../../core/view/middlewares/guards/jwt-auth.guard";
 import { UpdateOwnerDto } from "./dto/update-owner.dto";
+import { OwnerRepository } from "src/core/app/repositories/owner/owners.service";
 
 @ApiTags("Owners")
 @Controller("owners")
 export class OwnersController {
-  constructor(private readonly ownersService: OwnersService) {}
+  constructor(private readonly ownersService: OwnerRepository) {}
 
   @Get("profile")
   @UseGuards(JwtAuthGuard)

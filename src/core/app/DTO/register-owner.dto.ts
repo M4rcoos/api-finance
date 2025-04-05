@@ -20,3 +20,14 @@ export class RegisterOwnerDto {
   @IsNotEmpty()
   phone: string;
 }
+
+
+export class findEmailDto {
+
+  @ApiProperty({ example: "owner@example.com" })
+  @IsEmail()
+  @IsNotEmpty()
+  email: string;
+
+
+}

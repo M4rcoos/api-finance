@@ -19,7 +19,7 @@ import {
   ApiQuery,
 } from "@nestjs/swagger";
 import { ExpensesService } from "./expenses.service";
-import { JwtAuthGuard } from "../auth/guards/jwt-auth.guard";
+import { JwtAuthGuard } from "../../core/view/middlewares/guards/jwt-auth.guard";
 import { CreateExpenseDto } from "./dto/create-expense.dto";
 import { UpdateExpenseDto } from "./dto/update-expense.dto";
 

@@ -1,12 +1,12 @@
 import { Module } from "@nestjs/common";
-import { OwnersService } from "./owners.service";
 import { OwnersController } from "./owners.controller";
 import { PrismaModule } from "../../infra/prisma/prisma.module";
+import { OwnerRepository } from "src/core/app/repositories/owner/owners.service";
 
 @Module({
   imports: [PrismaModule],
   controllers: [OwnersController],
-  providers: [OwnersService],
-  exports: [OwnersService],
+  providers: [OwnerRepository],
+  exports: [OwnerRepository],
 })
 export class OwnersModule {}
