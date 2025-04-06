@@ -1,10 +1,11 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { PrismaService } from '../../infra/prisma/prisma.service';
-import { CreateClientDto } from './dto/create-client.dto';
-import { UpdateClientDto } from './dto/update-client.dto';
+import { PrismaService } from '../../../../infra/prisma/prisma.service';
+import { UpdateClientDto } from '../../DTO/update-client.dto';
+import { CreateClientDto } from '../../DTO/create-client.dto';
+
 
 @Injectable()
-export class ClientsService {
+export class ClientRepository {
   constructor(private prisma: PrismaService) {}
 
   async create(createClientDto: CreateClientDto) {
@@ -21,16 +22,10 @@ export class ClientsService {
     const client = await this.prisma.client.findUnique({
       where: { id },
     });
-
-    if (!client) {
-      throw new NotFoundException(`Client with ID ${id} not found`);
-    }
-
     return client;
   }
 
   async update(id: number, updateClientDto: UpdateClientDto) {
-    // Check if client exists
     await this.findOne(id);
 
     return this.prisma.client.update({

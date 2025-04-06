@@ -6,14 +6,14 @@ import {
 import { PrismaService } from '../../infra/prisma/prisma.service';
 import { CreateTransactionDto } from './dto/create-transaction.dto';
 import { ServicesService } from '../services/services.service';
-import { ClientsService } from '../clients/clients.service';
+import { ClientRepository } from 'src/core/app/repositories/clients/clients.service';
 
 @Injectable()
 export class TransactionsService {
   constructor(
     private prisma: PrismaService,
     private servicesService: ServicesService,
-    private clientsService: ClientsService,
+    private clientsRepository: ClientRepository,
   ) {}
 
   async create(createTransactionDto: CreateTransactionDto, ownerId: number) {
@@ -21,7 +21,7 @@ export class TransactionsService {
     await this.servicesService.findOne(createTransactionDto.serviceId, ownerId);
 
     // Check if client exists
-    await this.clientsService.findOne(createTransactionDto.clientId);
+    await this.clientsRepository.findOne(createTransactionDto.clientId);
 
     return this.prisma.transaction.create({
       data: {
