@@ -12,7 +12,7 @@ import { OwnerEntity } from "src/core/domain/entities/owner.entity";
 
 
 @Injectable()
-export class AuthService {
+export class AuthUseCase {
   constructor(
     private OwnerRepository: OwnerRepository,
     private jwtService: JwtService
