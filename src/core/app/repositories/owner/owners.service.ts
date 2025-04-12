@@ -36,6 +36,7 @@ export class OwnerRepository {
   }
 
   async findByEmail(email: string) {
+    console.log("🚀 ~ OwnerRepository ~ findByEmail ~ email:", email)
     return this.prisma.owner.findUnique({
       where: { email },
     });

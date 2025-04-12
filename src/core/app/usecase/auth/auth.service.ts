@@ -9,6 +9,7 @@ import { LoginDto } from "../../../app/DTO/login.dto";
 import { findEmailDto, RegisterOwnerDto } from "../../../app/DTO/register-owner.dto";
 import { OwnerRepository } from "../../repositories/owner/owners.service";
 import { OwnerEntity } from "src/core/domain/entities/owner.entity";
+import { badRequest } from "src/core/domain/http/api-response";
 
 
 @Injectable()
@@ -83,15 +84,16 @@ export class AuthUseCase {
     };
   }
   async getOwner(itOwner: findEmailDto) {
-  
+   if(itOwner.email === null ||itOwner.email === undefined|| itOwner.email === ""){
+    badRequest({errors:"insira um email"});
+   }
     const email = (itOwner as any).email?.email || itOwner.email;
 
   
     const owner = await this.OwnerRepository.findByEmail(email);
   
-    console.log(owner);
-    if (!owner) {
-      throw new UnauthorizedException("Invalid email");
+    if (!owner?.email) {
+      badRequest({errors:"Email inválido"});
     }
     return {
       owner: {
