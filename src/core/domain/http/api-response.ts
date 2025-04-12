@@ -1,3 +1,4 @@
+import { CustomHttpException } from "./http-exception";
 import { HttpResponse } from "./http-response";
 
 interface OkParams {
@@ -28,8 +29,8 @@ interface BadRequest {
   headers?: any;
 }
 
-export function badRequest({ errors, headers }: BadRequest): HttpResponse {
-  return {
+export function badRequest({ errors, headers }: BadRequest): never {
+  const response: HttpResponse = {
     statusCode: 400,
     success: false,
     payload: {},
@@ -38,6 +39,8 @@ export function badRequest({ errors, headers }: BadRequest): HttpResponse {
     errors,
     headers,
   };
+
+  throw new CustomHttpException(response);
 }
 
 export function notFound({ errors, headers }: BadRequest) {

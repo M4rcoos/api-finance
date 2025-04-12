@@ -3,12 +3,13 @@ import {
   NotFoundException,
   ForbiddenException,
 } from '@nestjs/common';
-import { PrismaService } from '../../infra/prisma/prisma.service';
-import { CreateExpenseDto } from './dto/create-expense.dto';
-import { UpdateExpenseDto } from './dto/update-expense.dto';
+import { PrismaService } from '../../../../infra/prisma/prisma.service';
+import { CreateExpenseDto } from '../../DTO/create-expense.dto';
+import { UpdateExpenseDto } from '../../DTO/update-expense.dto';
+
 
 @Injectable()
-export class ExpensesService {
+export class ExpensesRepository {
   constructor(private prisma: PrismaService) {}
 
   async create(createExpenseDto: CreateExpenseDto, ownerId: number) {

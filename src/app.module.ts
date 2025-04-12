@@ -6,7 +6,7 @@ import { OwnersModule } from './modules/owners/owners.module';
 import { ServicesModule } from './modules/services/services.module';
 import { ClientsModule } from './core/view/controllers/clients/clients.module';
 import { TransactionsModule } from './modules/transactions/transactions.module';
-import { ExpensesModule } from './modules/expenses/expenses.module';
+import { ExpensesModule } from './core/view/controllers/expenses/expenses.module';
 
 @Module({
   imports: [
