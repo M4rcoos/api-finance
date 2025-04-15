@@ -3,14 +3,14 @@ import {
   NotFoundException,
   ForbiddenException,
 } from '@nestjs/common';
-import { PrismaService } from '../../infra/prisma/prisma.service';
-import { CreateTransactionDto } from './dto/create-transaction.dto';
+import { PrismaService } from '../../../../infra/prisma/prisma.service';
 
 import { ClientRepository } from 'src/core/app/repositories/clients/clients.service';
 import { ServicesRepository } from 'src/core/app/repositories/services/services.service';
+import { CreateTransactionDto } from '../../DTO/create-transaction.dto';
 
 @Injectable()
-export class TransactionsService {
+export class TransactionsRepository {
   constructor(
     private prisma: PrismaService,
     private servicesService: ServicesRepository,
@@ -61,7 +61,7 @@ export class TransactionsService {
     });
   }
 
-  async findOne(id: number, ownerId: number) {
+  async findOne(id: number) {
     const transaction = await this.prisma.transaction.findUnique({
       where: { id },
       include: {
@@ -70,15 +70,7 @@ export class TransactionsService {
       },
     });
 
-    if (!transaction) {
-      throw new NotFoundException(`Transaction with ID ${id} not found`);
-    }
-
-    if (transaction.ownerId !== ownerId) {
-      throw new ForbiddenException(
-        'You do not have access to this transaction',
-      );
-    }
+   
 
     return transaction;
   }
@@ -119,13 +111,11 @@ export class TransactionsService {
       return acc;
     }, {} as Record<string, number>);
 
-    // Calculate total expenses
     const totalExpenses = expenses.reduce(
       (sum, expense) => sum + expense.value,
       0,
     );
 
-    // Calculate net profit
     const netProfit = totalRevenue - totalExpenses;
 
     return {
