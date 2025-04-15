@@ -3,7 +3,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
 import { PrismaService } from 'src/infra/prisma/prisma.service';
 import { RegisterOwnerDto } from '../../DTO/register-owner.dto';
-import { UpdateOwnerDto } from 'src/modules/owners/dto/update-owner.dto';
+import { UpdateOwnerDto } from '../../DTO/update-owner.dto';
 
 @Injectable()
 export class OwnerRepository {
