@@ -5,14 +5,15 @@ import {
 } from '@nestjs/common';
 import { PrismaService } from '../../infra/prisma/prisma.service';
 import { CreateTransactionDto } from './dto/create-transaction.dto';
-import { ServicesService } from '../services/services.service';
+
 import { ClientRepository } from 'src/core/app/repositories/clients/clients.service';
+import { ServicesRepository } from 'src/core/app/repositories/services/services.service';
 
 @Injectable()
 export class TransactionsService {
   constructor(
     private prisma: PrismaService,
-    private servicesService: ServicesService,
+    private servicesService: ServicesRepository,
     private clientsRepository: ClientRepository,
   ) {}
 

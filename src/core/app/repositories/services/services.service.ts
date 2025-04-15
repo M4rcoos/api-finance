@@ -3,12 +3,13 @@ import {
   NotFoundException,
   ForbiddenException,
 } from '@nestjs/common';
-import { PrismaService } from '../../infra/prisma/prisma.service';
-import { CreateServiceDto } from './dto/create-service.dto';
-import { UpdateServiceDto } from './dto/update-service.dto';
+import { PrismaService } from '../../../../infra/prisma/prisma.service';
+import { CreateServiceDto } from '../../DTO/create-service.dto';
+import { UpdateServiceDto } from '../../DTO/update-service.dto';
+
 
 @Injectable()
-export class ServicesService {
+export class ServicesRepository {
   constructor(private prisma: PrismaService) {}
 
   async create(createServiceDto: CreateServiceDto, ownerId: number) {
@@ -31,13 +32,7 @@ export class ServicesService {
       where: { id },
     });
 
-    if (!service) {
-      throw new NotFoundException(`Service with ID ${id} not found`);
-    }
-
-    if (service.ownerId !== ownerId) {
-      throw new ForbiddenException('You do not have access to this service');
-    }
+ 
 
     return service;
   }
