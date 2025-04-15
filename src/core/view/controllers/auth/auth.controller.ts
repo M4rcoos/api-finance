@@ -2,7 +2,7 @@ import { Controller, Post, Body, HttpCode, HttpStatus, Get, UsePipes, Validation
 import { ApiTags, ApiOperation, ApiResponse } from "@nestjs/swagger";
 import { LoginDto } from "../../../app/DTO/login.dto";
 import { RegisterOwnerDto } from "../../../app/DTO/register-owner.dto";
-import { AuthUseCase } from "src/core/app/usecase/auth/auth.service";
+import { AuthUseCase } from "src/core/app/usecase/auth/auth.use-case";
 import { ok } from "src/core/domain/http/api-response";
 
 @ApiTags("Authentication")

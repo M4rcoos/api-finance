@@ -20,7 +20,7 @@ import {
 } from "@nestjs/swagger";
 import { JwtAuthGuard } from "../../middlewares/guards/jwt-auth.guard";
 
-import { ExpensesUseCase } from "src/core/app/usecase/expenses/expenses.service";
+import { ExpensesUseCase } from "src/core/app/usecase/expenses/expenses.use-case";
 import { ExpensesRepository } from "src/core/app/repositories/expenses/expenses.service";
 import { CreateExpenseDto } from "src/core/app/DTO/create-expense.dto";
 import { UpdateExpenseDto } from "src/core/app/DTO/update-expense.dto";

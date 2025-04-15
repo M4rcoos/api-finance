@@ -14,7 +14,7 @@ import {
   ApiOperation,
 } from "@nestjs/swagger";
 import { JwtAuthGuard } from "../../middlewares/guards/jwt-auth.guard";
-import { ClientsUseCase } from "src/core/app/usecase/clients/clients.service";
+import { ClientsUseCase } from "src/core/app/usecase/clients/clients.use-case";
 import { CreateClientDto } from "src/core/app/DTO/create-client.dto";
 import { UpdateClientDto } from "src/core/app/DTO/update-client.dto";
 import { ok } from "src/core/domain/http/api-response";
