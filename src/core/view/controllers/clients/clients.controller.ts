@@ -32,7 +32,7 @@ export class ClientsController {
   async create(@Body() createClientDto: CreateClientDto) {
     const response = await this.clientsUseCase.create(createClientDto);
     return ok({
-      payload:{response}
+      payload:response
     })
   }
 
@@ -41,7 +41,7 @@ export class ClientsController {
   async findAll() {
     const response = await this.clientsUseCase.findAll();
     return ok({
-      payload:{response}
+      payload:response
     })
   }
 
