@@ -40,11 +40,12 @@ model Service {
 model Client {
     id           Int           @id @default(autoincrement())
     name         String
+    surname      String
     createdAt    DateTime      @default(now()) @map("created_at")
     updatedAt    DateTime      @updatedAt @map("updated_at")
     transactions Transaction[]
-    Owner        Owner?        @relation(fields: [ownerId], references: [id])
-    ownerId      Int?
+    Owner        Owner         @relation(fields: [owner_id], references: [id])
+    owner_id     Int
 
     @@map("clients")
 }
