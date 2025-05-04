@@ -1,7 +1,5 @@
 import {
     Injectable,
-    NotFoundException,
-    ForbiddenException,
   } from '@nestjs/common';
 import { ServicesRepository } from '../../repositories/services/services.service';
 import { CreateServiceDto } from '../../DTO/create-service.dto';
@@ -23,11 +21,7 @@ import { badRequest } from 'src/core/domain/http/api-response';
     async findOne(id: number, ownerId: number) {
       const service = await this.repository.findOne(id, ownerId);
       if (!service) {
-       badRequest({errors:`Serviço não encontrado`});
-      }
-  
-      if (service.ownerId !== ownerId) {
-        badRequest({errors:'Você não tem acesso a esse serviço'});
+        badRequest({ errors: 'Serviço não encontrado ou você não tem acesso a ele' });
       }
       return service;
     }

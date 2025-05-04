@@ -1,7 +1,6 @@
 import {
   Injectable,
-  NotFoundException,
-  ForbiddenException,
+
 } from '@nestjs/common';
 import { PrismaService } from '../../../../infra/prisma/prisma.service';
 import { CreateServiceDto } from '../../DTO/create-service.dto';
@@ -27,12 +26,10 @@ export class ServicesRepository {
     });
   }
 
-  async findOne(id: number, ownerId: number) {
+  async findOne(id: number, ownerId?: number) {
     const service = await this.prisma.service.findUnique({
-      where: { id },
+      where: { id, ownerId },
     });
-
- 
 
     return service;
   }
@@ -42,7 +39,6 @@ export class ServicesRepository {
     updateServiceDto: UpdateServiceDto,
     ownerId: number,
   ) {
-    // Check if service exists and belongs to owner
     await this.findOne(id, ownerId);
 
     return this.prisma.service.update({
