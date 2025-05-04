@@ -50,17 +50,16 @@ export class AuthUseCase {
       },
     };
   }
-
   async login(loginDto: LoginDto) {
     const ownerData = await this.OwnerRepository.findByEmail(loginDto.email);
     if (!ownerData) {
       throw new UnauthorizedException("Invalid email or password");
     }
-
     const owner = new OwnerEntity(
       ownerData.id,
       ownerData.email,
       ownerData.password,
+      ownerData.phone,
       ownerData.establishmentName,
     );
 
@@ -68,7 +67,7 @@ export class AuthUseCase {
     if (!isPasswordValid) {
     throw new UnauthorizedException("Invalid email or password");
     }
-
+ 
     const token = this.jwtService.sign({
       sub: owner.id,
       email: owner.email,
@@ -79,6 +78,7 @@ export class AuthUseCase {
       owner: {
         id: owner.id,
         email: owner.email,
+        phone:owner.phone,
         establishmentName: owner.establishmentName,
       },
     };

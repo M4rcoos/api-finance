@@ -5,6 +5,7 @@ export class OwnerEntity {
       public readonly id: number,
       public readonly email: string,
       public readonly password: string,
+      public readonly phone: string,
       public readonly establishmentName: string,
     ) {}
   
@@ -16,6 +17,7 @@ export class OwnerEntity {
       return {
         id: this.id,
         email: this.email,
+        phone:this.phone,
         establishmentName: this.establishmentName,
       };
     }

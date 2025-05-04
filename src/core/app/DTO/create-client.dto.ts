@@ -10,7 +10,8 @@ export class CreateClientDto {
   @IsNotEmpty()
   surname: string;
 
-  @ApiProperty({ example: "Vinicius" })
+  @ApiProperty({ example: "11930772498" })
+  @IsNotEmpty()
   phone: string;
 
   @ApiProperty({example:1})

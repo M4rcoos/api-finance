@@ -14,8 +14,12 @@ export class ClientRepository {
     });
   }
 
-  async findAll() {
-    return this.prisma.client.findMany();
+  async findAll(owner_id:number) {
+    return this.prisma.client.findMany({
+      where:{
+        owner_id:owner_id
+      }
+    });
   }
 
   async findOne(id: number) {

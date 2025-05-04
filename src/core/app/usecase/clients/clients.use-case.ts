@@ -13,8 +13,11 @@ export class ClientsUseCase {
   async create (createClientDto: CreateClientDto){
     return await this.clientRepository.create(createClientDto)
   }
-  async findAll() {
-    return  this.clientRepository.findAll()
+  async findAll(owner_id:number) {
+    if (!owner_id) {
+      throw new NotFoundException(`Owner_id ${owner_id} not found`);
+    }
+    return  this.clientRepository.findAll(owner_id)
   }
 
   async findOne(id: number) {

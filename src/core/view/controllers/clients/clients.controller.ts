@@ -7,6 +7,7 @@ import {
   Param,
   UseGuards,
   ParseIntPipe,
+  Headers,
 } from "@nestjs/common";
 import {
   ApiBearerAuth,
@@ -38,8 +39,9 @@ export class ClientsController {
 
   @Get()
   @ApiOperation({ summary: "Get all clients" })
-  async findAll() {
-    const response = await this.clientsUseCase.findAll();
+  async findAll(@Headers('owner_id') owner_id:number) {
+    const ownerIdAsNumber = Number(owner_id);
+    const response = await this.clientsUseCase.findAll(ownerIdAsNumber);
     return ok({
       payload:response
     })
