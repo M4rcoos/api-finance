@@ -1,4 +1,4 @@
-import { Controller, Get, Put, Body, UseGuards, Request } from "@nestjs/common";
+import { Controller, Get, Put, Body, UseGuards, Request, Param, ParseIntPipe } from "@nestjs/common";
 import {
   ApiBearerAuth,
   ApiTags,
@@ -14,7 +14,7 @@ import { UpdateOwnerDto } from "src/core/app/DTO/update-owner.dto";
 export class OwnersController {
   constructor(private readonly ownersService: OwnersUseCase) {}
 
-  @Get("profile")
+  @Get("profile/me")
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
   @ApiOperation({ summary: "Get current owner profile" })
@@ -23,12 +23,12 @@ export class OwnersController {
     return ok({payload:response})
   }
 
-  @Put("profile")
+  @Put("profile/:id")
   @UseGuards(JwtAuthGuard)
   @ApiBearerAuth()
   @ApiOperation({ summary: "Update current owner profile" })
-  async updateProfile(@Request() req, @Body() updateOwnerDto: UpdateOwnerDto) {
-    const response = await this.ownersService.update(req.user.id, updateOwnerDto);
+  async updateProfile(@Param('id', ParseIntPipe) id: number, @Body() updateOwnerDto: UpdateOwnerDto) {
+    const response = await this.ownersService.update(id, updateOwnerDto);
     return ok({payload:response})
   }
 

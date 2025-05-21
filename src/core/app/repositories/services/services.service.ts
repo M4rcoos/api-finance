@@ -1,5 +1,6 @@
 import {
   Injectable,
+  NotFoundException,
 
 } from '@nestjs/common';
 import { PrismaService } from '../../../../infra/prisma/prisma.service';
@@ -26,13 +27,13 @@ export class ServicesRepository {
     });
   }
 
-  async findOne(id: number, ownerId?: number) {
-    const service = await this.prisma.service.findUnique({
-      where: { id, ownerId },
-    });
+  // async findOne(id: number, ownerId?: number) {
+  //   const service = await this.prisma.service.findUnique({
+  //     where: { id, ownerId },
+  //   });
 
-    return service;
-  }
+  //   return service;
+  // }
 
   async update(
     id: number,
@@ -47,12 +48,20 @@ export class ServicesRepository {
     });
   }
 
-  async remove(id: number, ownerId: number) {
-    // Check if service exists and belongs to owner
-    await this.findOne(id, ownerId);
-
-    return this.prisma.service.delete({
-      where: { id },
-    });
+  async findOne(id: number, ownerId: number) {
+    const service = await this.prisma.service.findUnique({ where: { id } });
+  
+    if (!service || service.ownerId !== ownerId) {
+      throw new NotFoundException('Serviço não encontrado ou não pertence a este usuário');
+    }
+  
+    return service;
   }
+  
+  async remove(id: number, ownerId: number) {
+    await this.findOne(id, ownerId); // garante que só é dono
+  
+    return this.prisma.service.delete({ where: { id } });
+  }
+  
 }
