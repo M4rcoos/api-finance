@@ -1,102 +1,152 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# 🧾 API Finance - Sistema de Gestão Multi-Estabelecimentos
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+Sistema web de **gestão financeira e operacional** para pequenos negócios (lava-rápido, salão de beleza, oficina, etc). A plataforma permite que **cada proprietário ("owner") gerencie seus próprios serviços, atendimentos, receitas e despesas**, de forma segura, organizada e com relatórios completos.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+---
 
-## Description
+## 🚀 Tecnologias Utilizadas
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+- **Backend:** [NestJS](https://nestjs.com/)
+- **ORM:** [Prisma](https://www.prisma.io/) (com MySQL)
+- **Banco de Dados:** MySQL
+- **Autenticação:** JWT (JSON Web Token)
+- **Criptografia:** Bcrypt
+- **Documentação:** Swagger
+- **Frontend:** React + Tailwind CSS
 
-## Project setup
+---
+
+## 📦 Instalação do Projeto
+
+### 1. Clone o repositório
 
 ```bash
-$ pnpm install
+git clone https://github.com/M4rcoos/api-finance.git
+cd api-finance
 ```
-
-## Compile and run the project
-
+### 2. Instale as dependências
 ```bash
-# development
-$ pnpm run start
-
-# watch mode
-$ pnpm run start:dev
-
-# production mode
-$ pnpm run start:prod
+npm install
 ```
-
-## Run tests
-
+### 3. Configure o banco com Docker
 ```bash
-# unit tests
-$ pnpm run test
-
-# e2e tests
-$ pnpm run test:e2e
-
-# test coverage
-$ pnpm run test:cov
+docker-compose up -d
 ```
 
-## Deployment
-
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
-
+### 4. Execute a aplicação
 ```bash
-$ pnpm install -g mau
-$ mau deploy
+npm run start:dev
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infra.
+### A API estará disponível em:
+http://localhost:3000
 
-## Resources
+## 📘 Documentação Swagger
+Acesse a documentação da API em:
 
-Check out a few resources that may come in handy when working with NestJS:
+http://localhost:3000/api/docs
+Inclui rotas de autenticação, serviços, despesas, atendimentos e relatórios.
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+##💡 Ideia do Projeto
+Sistema multi-tenant voltado para pequenos negócios. Cada proprietário (owner) tem seu próprio ambiente para gerenciar:
 
-## Support
+Serviços personalizados
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+Registros de atendimentos
 
-## Stay in touch
+Receitas e despesas
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+Relatórios financeiros com filtros e gráficos
 
-## License
+## 🧩 Funcionalidades
+✅ Cadastro e Login (JWT)
+Criação de contas de estabelecimentos
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+Login com autenticação segura (senha criptografada)
 
-```bash $
-docker run --name mysql-api-finance -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=api-finance -p 3306:3306 -d mysql 
-```
+✅ Serviços
+Cadastrar / Editar / Deletar serviços
+
+Ativar ou inativar serviços
+
+✅ Atendimentos
+Registro completo do atendimento:
+
+Cliente
+
+Serviço
+
+Valor
+
+Forma de pagamento
+
+✅ Controle Financeiro
+Registro de despesas operacionais
+
+Relatórios:
+
+Diário, mensal e anual
+
+Lucro líquido
+
+Comparativos de receita x despesa
+
+## 🗄️ Estrutura do Banco de Dados (MySQL)
+owners
+id, nome, email (único), senha, telefone
+
+servicos
+id, descrição, valor, status, owner_id
+
+lancamentos (atendimentos)
+id, cliente_id, servico_id, valor, forma_pagamento, data, owner_id
+
+despesas
+id, descrição, valor, data, owner_id
+
+clientes
+id, nome
+
+## 🔗 Relacionamentos
+Owner possui muitos Serviços, Atendimentos e Despesas
+
+Serviços pertencem a um único Owner
+
+Atendimentos vinculam clientes e serviços de um Owner
+
+## 📊 Relatórios e Gráficos
+Lucro líquido por período
+
+Total de despesas
+
+Comparação visual entre receitas e despesas
+
+Filtros por dia, mês ou ano
+
+## 🔐 Segurança
+Senhas criptografadas com Bcrypt
+
+Autenticação JWT
+
+Separação de dados por estabelecimento (multi-tenant)
+
+## 🌟 Diferenciais
+Multi-Owner: múltiplos estabelecimentos isolados
+
+Gestão financeira detalhada
+
+Serviços personalizados por estabelecimento
+
+Relatórios gráficos e filtros por período
+
+API documentada com Swagger
+
+## 📈 Futuras Implementações
+Login com Google (OAuth2)
+
+Dashboard com estatísticas em tempo real
+
+Exportação de relatórios (PDF / Excel)
+
+Multiusuários por estabelecimento (funcionários)
+
